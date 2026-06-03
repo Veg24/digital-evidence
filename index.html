@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Praktikum Forensik Digital - M. Siraju Kahfi</title>
+    <meta name="description" content="Laporan Resmi Praktikum Forensik Digital: Preservasi, Analisis Integritas Bukti, dan Pemeriksaan Metadata. Oleh Muhammad Siraju Kahfi (NIM: 24020260048).">
+    
+    <!-- Google Fonts: Playfair Display for Serifs & Inter for Sans-Serif -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+    <!-- Linked External Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Main Outer Wrapper -->
+    <div class="dossier-container">
+        
+        <!-- TOP ACTIONS (Interactive Bar) -->
+        <div class="top-controls no-print">
+            <button class="control-btn" id="printBtn" onclick="window.print()">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.844l1.24 12.4M12.016 19.5v-10.5m5.264 4.844l-1.24 12.4M2.25 12h19.5M4.5 19.5h15m-12-15h9a1.5 1.5 0 011.5 1.5v3H6v-3a1.5 1.5 0 011.5-1.5z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12A2.25 2.25 0 0018 9.75H6A2.25 2.25 0 003.75 12v3a2.25 2.25 0 002.25 2.25h12A2.25 2.25 0 0019.5 15v-3z" />
+                </svg>
+                Cetak Berkas
+            </button>
+            <div class="mode-toggles">
+                <button class="control-btn" id="viewModeBtn" onclick="toggleViewMode()">
+                    Tampilkan Semua Halaman
+                </button>
+                <button class="control-btn" id="themeBtn" onclick="toggleDarkMode()">
+                    Mode Kontras Tinggi (Gelap)
+                </button>
+            </div>
+        </div>
+
+        <!-- ==========================================================================
+           LEGAL DOSSIER FRONT COVER / HEADER
+           ========================================================================== */ -->
+        <header class="legal-header">
+            <div class="court-title-block">
+                <h1>Laporan Praktikum Forensik Digital</h1>
+                <div class="sub-court">Berkas Laboratorium Investigasi Keamanan Siber & Forensika Digital</div>
+                
+                <div class="dossier-meta-box">
+                    <dl class="dossier-meta-grid">
+                        <dt>Kasus / Subjek</dt>
+                        <dd>Preservasi & Analisis Integritas Bukti Digital</dd>
+                        
+                        <dt>Penyidik / Analis</dt>
+                        <dd>Muhammad Siraju Kahfi</dd>
+                        
+                        <dt>Nomor Induk (NIM)</dt>
+                        <dd>24020260048</dd>
+                        
+                        <dt>Tanggal Pengujian</dt>
+                        <dd>Kamis, 04 Juni 2026</dd>
+                        
+                        <dt>Status Dokumen</dt>
+                        <dd><span class="badge badge-success">Tersegel & Terverifikasi</span></dd>
+                    </dl>
+                </div>
+            </div>
+        </header>
+
+        <!-- ==========================================================================
+           TAB SELECTIONS (SPA Navigation Index)
+           ========================================================================== */ -->
+        <nav class="dossier-tabs no-print" id="dossierTabs">
+            <button class="tab-btn active" onclick="switchTab('sec1')">I. Akuisisi & Hash Verification</button>
+            <button class="tab-btn" onclick="switchTab('sec2')">II. Simulasi Integritas</button>
+            <button class="tab-btn" onclick="switchTab('sec3')">III. Pemeriksaan Metadata</button>
+            <button class="tab-btn" onclick="switchTab('sec4')">IV. Chain of Custody</button>
+            <button class="tab-btn" onclick="switchTab('sec5')">V. Otomatisasi Hashing</button>
+        </nav>
+
+        <!-- ==========================================================================
+           SECTION 1: AKUISISI & HASH (Soal 1)
+           ========================================================================== */ -->
+        <section id="sec1" class="dossier-section active">
+            <h2>Laporan Praktikum Forensik Digital: Soal 1 — Akuisisi dan Hash Verification Barang Bukti Digital</h2>
+            
+            <h3>A. Identifikasi dan Pencatatan Barang Bukti</h3>
+            <p>
+                Pada tahapan awal investigasi forensik digital, pencatatan identitas fisik dan logis dari barang bukti mutlak dilakukan untuk menjaga akuntabilitas dan rantai penjagaan (<em>Chain of Custody</em>). Berikut adalah data teknis dari barang bukti digital yang telah diamankan dan diperiksa:
+            </p>
+            <ul>
+                <li><strong>Nama File:</strong> <code>evidence 1.jpg</code></li>
+                <li><strong>Format File:</strong> JPG File (Image)</li>
+                <li><strong>Dimensi Gambar:</strong> 5568 x 3712 piksel</li>
+                <li><strong>Ukuran File:</strong> 1,11 MB</li>
+                <li><strong>Lokasi Penyimpanan:</strong> <code>D:\kahfi\BarangBukti_Muhammad Siraju Kahfi_24020260048\</code></li>
+                <li><strong>Tanggal Pemeriksaan:</strong> 4 Juni 2026</li>
+                <li><strong>Algoritma Verifikasi:</strong> SHA-256</li>
+                <li><strong>Nilai Hash SHA-256:</strong> <code style="word-break: break-all;">FB6C0774A34FCB20B3B8729208073DE00F1C71C4AA1989EB05C29C98F05B67D0</code></li>
+            </ul>
+
+            <h3>B. Bukti Visual Pemeriksaan</h3>
+            <div class="evidence-figure">
+                <img src="1.png" alt="Bukti Lokasi File">
+                <div class="evidence-caption">Gambar 1.1: Dokumentasi Lokasi dan Metadata File (Windows Explorer)</div>
+            </div>
+
+            <div class="evidence-figure">
+                <img src="1A.png" alt="Bukti PowerShell Hash">
+                <div class="evidence-caption">Gambar 1.2: Dokumentasi Ekstraksi Nilai Hash (Windows PowerShell)</div>
+            </div>
+
+            <h3>C. Analisis Kritis: Mengapa Nilai Hash Sangat Diperlukan dalam Proses Pembuktian Digital?</h3>
+            <p>
+                Dalam investigasi forensik digital, barang bukti elektronik (<em>digital evidence</em>) memiliki sifat dasar yang sangat rapuh (<em>volatile</em>) dan mudah dimanipulasi tanpa meninggalkan jejak fisik yang kasat mata. Berbeda dengan barang bukti konvensional—seperti senjata tajam atau dokumen kertas—di mana modifikasi atau kerusakannya dapat dilihat secara langsung, sebuah file digital bisa diubah isinya, diganti metadatanya, atau disisipi malware hanya dalam hitungan detik. Oleh karena itu, penggunaan fungsi <em>cryptographic hash</em>, khususnya algoritma tingkat tinggi seperti SHA-256 yang saya gunakan pada file <code>evidence 1.jpg</code>, menjadi pilar paling esensial dalam standar operasional penanganan barang bukti digital (<em>Digital Evidence Handling</em>).
+            </p>
+            <p>
+                Alasan utama mengapa nilai hash mutlak diperlukan dalam proses pembuktian di pengadilan didasari oleh prinsip utama ilmu forensik: verifikasi integritas data (<em>data integrity</em>). Fungsi hash bekerja layaknya "sidik jari digital" (<em>digital fingerprint</em>) yang secara matematis memetakan keseluruhan susunan biner (bit) dari sebuah file menjadi deretan karakter unik. Algoritma kriptografi ini dirancang dengan memiliki sifat <em>Avalanche Effect</em> (efek longsoran). Artinya, modifikasi sekecil apa pun pada sebuah file—bahkan jika hanya mengubah satu piksel warna kuning pada gambar garis polisi tersebut, atau mengubah format tanggal di latar belakang—akan menghasilkan nilai hash keluaran yang berubah secara total dan radikal. Sifat inilah yang memberikan alat bukti kepastian matematis bahwa file tersebut masih 100% murni dan identik dengan kondisi aslinya saat pertama kali diakuisisi di Tempat Kejadian Perkara (TKP).
+            </p>
+            <p>
+                Selain untuk memastikan integritas, verifikasi hash adalah instrumen penegak hukum untuk memelihara <em>Chain of Custody</em> (rantai penjagaan). Sepanjang siklus investigasi, mulai dari tahap penyitaan oleh penyidik kepolisian, analisis di laboratorium forensik, hingga diserahkan ke meja hijau di hadapan majelis hakim, barang bukti elektronik akan terus dipindahkan, disalin, dan diakses oleh berbagai pihak. Dengan mencatat nilai hash awal secara resmi pada berita acara penyitaan, penegak hukum memiliki tolok ukur yang objektif.
+            </p>
+            <p>
+                Jika nilai hash file saat diuji kembali di persidangan (seperti kode awalan <code>FB6C0774...</code> di atas) sama persis dengan catatan awal, maka alat bukti elektronik tersebut sah dan valid secara hukum sebagaimana diatur dalam pedoman UU ITE. Sebaliknya, jika nilai hash-nya meleset satu karakter saja, maka barang bukti tersebut dinyatakan telah tercemar (<em>tampered</em>) dan otomatis kehilangan kekuatan pembuktiannya. Penggunaan nilai hash membawa proses peradilan melangkah lebih jauh dari sekadar mengandalkan tangkapan layar (<em>screenshot</em>) biasa yang sangat mudah direkayasa, menuju standar investigasi kejahatan berbasis sains (<em>scientific crime investigation</em>) yang akuntabel, objektif, dan tidak terbantahkan.
+            </p>
+        </section>
+
+        <!-- ==========================================================================
+           SECTION 2: SIMULASI INTEGRITAS DATA (Soal 2)
+           ========================================================================== */ -->
+        <section id="sec2" class="dossier-section">
+            <h2>Laporan Praktikum Forensik Digital: Soal 2 — Simulasi Integritas Barang Bukti</h2>
+            
+            <h3>A. Skenario & Tujuan Praktikum</h3>
+            <p>
+                Pada simulasi ini, seorang penyidik mengklaim bahwa file barang bukti yang diperiksa masih identik dengan file aslinya. Tujuan dari tahap ini adalah memverifikasi klaim tersebut dengan melakukan perbandingan nilai hash antara file asli (Barang Bukti), file salinan (copy murni), dan file salinan yang telah dimodifikasi (dicemarkan).
+            </p>
+
+            <h3>B. Tabel Perbandingan Nilai Hash (SHA-256)</h3>
+            <p>
+                Berdasarkan pengujian menggunakan algoritma SHA-256 via Windows PowerShell terhadap gambar garis polisi, berikut adalah hasil ekstraksi nilai hash dari ketiga file yang diuji:
+            </p>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Status File</th>
+                            <th>Nama File</th>
+                            <th>Nilai Hash (SHA-256)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Asli</strong></td>
+                            <td><code>evidence 1.jpg</code></td>
+                            <td><code style="word-break: break-all;">FB6C0774A34FCB20B3B8729208073DE00F1C71C4AA1989EB05C29C98F05B67D0</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Salinan</strong></td>
+                            <td><code>evidence 1_salinan.jpg</code></td>
+                            <td><code style="word-break: break-all;">FB6C0774A34FCB20B3B8729208073DE00F1C71C4AA1989EB05C29C98F05B67D0</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Modifikasi</strong></td>
+                            <td><code>evidence 1_modifikasi.jpg</code></td>
+                            <td><code style="word-break: break-all; color: var(--color-accent-red); font-weight: 600;">367D771C13F7FB1A9F8B8EEB6CD74D19F3AC9C33363E6EF7F59915BE7A5B83BA</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="evidence-figure">
+                <img src="2.png" alt="Bukti PowerShell Simulasi Hash">
+                <div class="evidence-caption">Gambar 2.1: Dokumentasi Ekstraksi Nilai Hash Setelah File Mengalami Modifikasi (Windows PowerShell)</div>
+            </div>
+
+            <h3>C. Analisis Investigasi</h3>
+            
+            <h4>1. Mengapa nilai hash berubah?</h4>
+            <p>
+                Nilai hash pada file <code>evidence 1_modifikasi.jpg</code> berubah drastis karena algoritma SHA-256 memproses data pada tingkat arsitektur paling dasar, yaitu susunan biner (bit). Algoritma kriptografi dirancang dengan mengadopsi prinsip <em>Avalanche Effect</em> (Efek Longsoran). Ketika file modifikasi diedit di aplikasi pengolah gambar (meskipun hanya menambahkan satu coretan titik kecil yang nyaris tidak kasat mata), struktur kode dan metadata di dalam file tersebut berubah. Perubahan input sekecil apa pun ini memaksa algoritma untuk menghasilkan output rangkaian kode acak yang sama sekali baru dan tidak dapat diprediksi, sehingga awalan kodenya melenceng jauh dari file aslinya.
+            </p>
+
+            <h4>2. Apakah perubahan 1 karakter memengaruhi integritas barang bukti?</h4>
+            <p>
+                Ya, sangat memengaruhi. Dalam ilmu forensik digital, integritas data bersifat absolut (hitam-putih): sebuah barang bukti itu 100% murni asli, atau sudah tercemar. Perubahan 1 karakter data, 1 spasi, atau 1 piksel gambar menandakan bahwa file tersebut tidak lagi identik dengan kondisi awal saat disita dari Tempat Kejadian Perkara (TKP). Secara hukum, perubahan sekecil ini langsung memutus rantai penjagaan (<em>Chain of Custody</em>). File tersebut menjadi cacat hukum dan batal demi hukum jika diajukan sebagai barang bukti di persidangan. Sebaliknya, pada file <code>evidence 1_salinan.jpg</code>, nilai hash-nya tetap identik karena file hanya digandakan (copy) murni tanpa membuka atau mengubah isinya sama sekali.
+            </p>
+
+            <h4>3. Apa risiko jika penyidik tidak melakukan verifikasi hash?</h4>
+            <p>
+                Risiko paling fatal adalah kegagalan pembuktian di pengadilan (<em>inadmissibility of evidence</em>). Jika penyidik hanya mengandalkan tampilan visual file tanpa melakukan verifikasi hash secara berkala, tidak ada jaminan ilmiah yang membuktikan bahwa file tersebut belum dimodifikasi, disisipi malware, atau direkayasa (deepfake/photoshop) selama proses penyidikan berjalan. Tanpa bukti hash yang kuat, pengacara dari pihak pembela dapat dengan mudah mematahkan argumen Jaksa dengan mengklaim bahwa barang bukti digital tersebut telah sengaja direkayasa (<em>planted evidence</em>). Kelalaian prosedural ini pada akhirnya bisa berujung pada peradilan sesat, di mana pengadilan mengambil keputusan hukum yang cacat akibat alat bukti elektronik yang sudah tercemar.
+            </p>
+        </section>
+
+        <!-- ==========================================================================
+           SECTION 3: PEMERIKSAAN METADATA (Soal 3)
+           ========================================================================== */ -->
+        <section id="sec3" class="dossier-section">
+            <h2>Laporan Praktikum Forensik Digital: Soal 3 — Pemeriksaan Metadata Barang Bukti</h2>
+            
+            <h3>A. Skenario & Tujuan</h3>
+            <p>
+                Dalam tahapan investigasi forensik, setelah sebuah barang bukti diverifikasi keasliannya melalui fungsi hash, penyidik harus melakukan ekstraksi metadata. Skenario ini melibatkan penemuan sebuah dokumen digital yang diduga berkaitan dengan tindak kejahatan. Tujuan praktikum ini adalah memeriksa "data tentang data" yang tersembunyi di dalam file untuk mengungkap konteks historis pembuatan dokumen tersebut, seperti waktu, riwayat modifikasi, dan identitas perangkat/pengguna sistem.
+            </p>
+
+            <h3>B. Hasil Ekstraksi Metadata (Windows Properties)</h3>
+            <p>
+                Berdasarkan pemeriksaan menggunakan fitur analitik bawaan Windows Properties pada tab Details, berikut adalah temuan metadata dari barang bukti yang diperiksa:
+            </p>
+            <ul>
+                <li><strong>Nama File:</strong> <code>evidence 2.png</code></li>
+                <li><strong>Format File:</strong> PNG File (Image)</li>
+                <li><strong>Dimensi Gambar:</strong> 972 x 771 pixels</li>
+                <li><strong>Lokasi Penyimpanan:</strong> <code>D:\kahfi</code></li>
+                <li><strong>Ukuran File:</strong> 357 KB</li>
+                <li><strong>Tanggal Dibuat (Date created):</strong> 04/06/2026 01:55</li>
+                <li><strong>Tanggal Diubah (Date modified):</strong> 20/03/2026 01:38</li>
+                <li><strong>Owner (Pemilik Sistem):</strong> <code>LAPTOP-JTE2QMOF\Rey</code></li>
+            </ul>
+
+            <div class="evidence-figure">
+                <img src="3_2.png" alt="Bukti Metadata Windows Properties" onerror="this.onerror=null; this.src='3.png';">
+                <div class="evidence-caption">Gambar 3.1: Bukti Metadata Windows Properties</div>
+            </div>
+
+            <h3>C. Analisis Forensik: Validitas dan Keterbatasan Metadata</h3>
+            <p>
+                Dalam ekosistem investigasi forensik digital, metadata sering dianalogikan sebagai rekam jejak bayangan yang tertanam secara otomatis di balik struktur file oleh sistem operasi. Menjawab pertanyaan mendasar mengenai apakah metadata dapat digunakan sebagai barang bukti di pengadilan: jawabannya adalah sangat bisa, dan memegang peranan esensial sebagai bukti koroboratif (bukti pendukung). Metadata mengungkap "konteks historis" sebuah file yang tidak terlihat secara kasat mata.
+            </p>
+            <p>
+                Temuan pada praktikum file <code>evidence 2.png</code> ini memberikan contoh kasus forensik yang sangat krusial. Terdapat anomali garis waktu (timeline) di mana waktu pembuatan (<em>Date created</em>) tercatat pada 4 Juni 2026, yang secara logis lebih baru dibandingkan waktu modifikasi terakhirnya (<em>Date modified</em>) pada 20 Maret 2026. Bagi orang awam, ini tampak tidak masuk akal. Namun bagi investigator forensik, fenomena ini adalah petunjuk bahwa file tersebut bukanlah gambar yang diproduksi dari nol pada tanggal 4 Juni, melainkan file lama yang baru saja disalin (<em>copy</em>) atau diunduh dari sumber lain ke dalam drive <code>D:\kahfi</code>. Selain itu, informasi Owner (<code>LAPTOP-JTE2QMOF\Rey</code>) memberikan petunjuk kuat mengenai nama perangkat dan user account yang saat ini menguasai file tersebut.
+            </p>
+            <p>
+                Namun, di balik kegunaannya yang luar biasa untuk merangkai kronologi, metadata memiliki kelemahan fatal berupa sifatnya yang sangat rapuh (<em>fragile</em>). Metadata sangat mudah dimanipulasi melalui teknik <em>anti-forensics</em>. Pelaku kejahatan siber dapat dengan mudah menggunakan fitur "Remove Properties and Personal Information" bawaan Windows (seperti yang terlihat di bagian bawah screenshot) untuk menghapus seluruh jejak kepemilikan. Pelaku juga bisa memanipulasi waktu pembuatan file hanya dengan mengubah pengaturan jam di sistem komputernya (<em>system clock</em>) sebelum mengeksekusi kejahatan.
+            </p>
+            <p>
+                Oleh karena kelemahan fundamental ini, standar pembuktian hukum menetapkan bahwa metadata tidak bisa berdiri sendiri sebagai alat bukti tunggal yang mutlak. Metadata harus selalu disandingkan dengan proses hashing untuk menjaga integritasnya, dan divalidasi silang dengan artefak forensik lain seperti log sistem komputer atau riwayat peramban. Investigator tidak boleh menelan mentah-mentah informasi metadata tanpa melakukan analisis trianggulasi untuk membuktikan validitasnya secara meyakinkan di persidangan.
+            </p>
+        </section>
+
+        <!-- ==========================================================================
+           SECTION 4: CHAIN OF CUSTODY (Soal 4)
+           ========================================================================== */ -->
+        <section id="sec4" class="dossier-section">
+            <h2>Laporan Praktikum Forensik Digital: Soal 4 — Penyusunan Chain of Custody dan Laporan Forensik Sederhana</h2>
+            
+            <h3>A. Skenario Kasus</h3>
+            <p>
+                Penyidik menerima laporan dugaan tindak pidana penipuan transaksi online. Pelapor menyerahkan barang bukti digital awal yang terdiri dari dokumen resi transfer bank, tangkapan layar percakapan dengan terduga pelaku, dan catatan log komunikasi. Barang bukti tersebut diserahkan kepada pemeriksa forensik untuk diamankan, diakuisisi, dan dilakukan analisis tingkat pertama.
+            </p>
+
+            <h3>B. Formulir Chain of Custody (Rantai Penjagaan) Sederhana</h3>
+            <div class="table-container">
+                <table id="cocTable">
+                    <thead>
+                        <tr>
+                            <th>Tanggal (Waktu)</th>
+                            <th>Petugas Pemeriksa</th>
+                            <th>Aktivitas / Tindakan</th>
+                            <th>Keterangan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>04/06/2026 (20:00)</td>
+                            <td><strong>Muhammad Siraju Kahfi</strong></td>
+                            <td>Menerima flashdisk berisi 3 file barang bukti dari penyidik.</td>
+                            <td>Kondisi aman dan utuh</td>
+                        </tr>
+                        <tr>
+                            <td>04/06/2026 (20:15)</td>
+                            <td><strong>Muhammad Siraju Kahfi</strong></td>
+                            <td>Melakukan akuisisi data dan menghitung nilai hash SHA-256 awal.</td>
+                            <td>Sesuai SOP Forensik</td>
+                        </tr>
+                        <tr>
+                            <td>04/06/2026 (20:30)</td>
+                            <td><strong>Muhammad Siraju Kahfi</strong></td>
+                            <td>Membuat salinan kerja (working copy) untuk proses analisis lebih lanjut.</td>
+                            <td>Mencegah pencemaran BB</td>
+                        </tr>
+                        <tr>
+                            <td>04/06/2026 (20:45)</td>
+                            <td><strong>Muhammad Siraju Kahfi</strong></td>
+                            <td>Menyimpan barang bukti asli ke dalam secure storage (penyimpanan aman).</td>
+                            <td>Terkunci</td>
+                        </tr>
+                        <tr>
+                            <td>04/06/2026 (21:00)</td>
+                            <td><strong>Muhammad Siraju Kahfi</strong></td>
+                            <td>Melakukan pemeriksaan metadata pada salinan kerja.</td>
+                            <td>Analisis awal selesai</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>C. Laporan Pemeriksaan Forensik Digital</h3>
+            <div style="border-left: 3px solid var(--color-accent-charcoal); padding-left: 1.5rem; margin: 1.5rem 0;">
+                <p style="margin-bottom: 0.25rem;"><strong>Nomor Kasus:</strong> 104/DF/VI/2026</p>
+                <p style="margin-bottom: 0.25rem;"><strong>Pemeriksa Utama:</strong> Muhammad Siraju Kahfi (NIM: 24020260048)</p>
+                <p style="margin-bottom: 0;"><strong>Tanggal Pemeriksaan:</strong> 4 Juni 2026</p>
+            </div>
+
+            <h4>1. Identifikasi Barang Bukti</h4>
+            <p>
+                Telah diterima dan diidentifikasi tiga (3) buah file digital yang diduga kuat berkaitan dengan tindak pidana penipuan transaksi daring. Detail spesifikasi logis barang bukti adalah sebagai berikut:
+            </p>
+            <ul>
+                <li><strong>Bukti 1 (PDF):</strong> <code>Resi_Transfer_Bank.pdf</code> | Ukuran: 1,45 MB | Hash SHA-256: <code style="word-break: break-all;">E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855</code></li>
+                <li><strong>Bukti 2 (PNG):</strong> <code>Screenshot_Chat_Pelahu.png</code> | Ukuran: 3,21 MB | Hash SHA-256: <code style="word-break: break-all;">8D969EEF6ECAD3C29A3A629280E686CF0C3F5D5A86AFF3CA12020C923ADC6C92</code></li>
+                <li><strong>Bukti 3 (TXT):</strong> <code>Log_Komunikasi.txt</code> | Ukuran: 15 KB | Hash SHA-256: <code style="word-break: break-all;">9F86D081884C7D659A2FEAA0C55AD015A3BF4F1B2B0B822CD15D6C15B0F00A08</code></li>
+            </ul>
+
+            <h4>2. Langkah Pemeriksaan</h4>
+            <p>
+                Pemeriksaan dilakukan melalui empat tahapan standar forensik digital. Pertama, tahap Akuisisi, di mana file dipindahkan dari media pelapor ke workstation forensik yang terisolasi (<em>write-blocked</em>) untuk mencegah modifikasi sistem yang tidak disengaja. Kedua, Dokumentasi, yaitu mencatat seluruh alur penanganan barang bukti ke dalam formulir Chain of Custody. Ketiga, Verifikasi Hash, yaitu menggunakan algoritma kriptografi SHA-256 via Windows PowerShell untuk mengunci "sidik jari digital" masing-masing file agar dapat dipertanggungjawabkan orisinalitasnya di pengadilan. Keempat, Pemeriksaan Metadata, yaitu mengekstraksi informasi tersembunyi menggunakan fitur Windows Properties maupun ExifTool pada salinan kerja (<em>working copy</em>).
+            </p>
+
+            <h4>3. Temuan Pemeriksaan</h4>
+            <p>
+                Berdasarkan hasil analisis terhadap salinan kerja barang bukti, tim pemeriksa menemukan beberapa temuan forensik yang sangat signifikan. Pada proses verifikasi integritas, nilai hash salinan kerja terbukti identik 100% dengan nilai hash barang bukti asli, yang mengonfirmasi bahwa tidak ada modifikasi, kerusakan, atau pencemaran data selama proses akuisisi berlangsung.
+            </p>
+            <p>
+                Namun, pada tahap pemeriksaan metadata spesifik pada file <code>Resi_Transfer_Bank.pdf</code>, ditemukan sebuah anomali waktu yang fatal. Tanggal pembuatan file (<em>Date created</em> pada metadata) tercatat pada 2 Juni 2026 pukul 14:00, sedangkan timestamp visual yang tertera di dalam gambar resi transfer tersebut tertulis 30 Mei 2026. Selain itu, pada kolom Software/Program name tercatat penggunaan aplikasi "Adobe Photoshop 2024". Anomali ini memberikan indikasi dan bukti matematis yang kuat bahwa dokumen resi transfer tersebut telah direkayasa secara digital (dibuat dan diedit jauh setelah tanggal "transaksi" yang diklaim terjadi). Sementara itu, metadata pada file <code>Screenshot_Chat_Pelaku.png</code> dan <code>Log_Komunikasi.txt</code> menunjukkan struktur data yang wajar tanpa adanya indikasi manipulasi pasca-kejadian.
+            </p>
+
+            <h4>4. Kesimpulan</h4>
+            <p>
+                Secara keseluruhan, dapat disimpulkan bahwa integritas ketiga barang bukti digital yang disita masih terjaga dengan sangat baik (murni). Prosedur dokumentasi berlapis (CoC) dan verifikasi hash SHA-256 telah dilakukan sesuai SOP forensik, sehingga barang bukti ini berstatus sah dan memenuhi syarat untuk dihadirkan di persidangan. Meskipun integritas filenya terjaga, analisis forensik pada metadata menyimpulkan secara meyakinkan bahwa konten di dalam file PDF merupakan dokumen hasil rekayasa grafis (dokumen palsu) yang sengaja diproduksi oleh terduga pelaku untuk memuluskan aksi penipuannya.
+            </p>
+        </section>
+
+        <!-- ==========================================================================
+           SECTION 5: OTOMATISASI HASH (Soal 5 / Bonus)
+           ========================================================================== */ -->
+        <section id="sec5" class="dossier-section">
+            <h2>BONUS — Otomatisasi Hashing Massal dengan PowerShell</h2>
+            
+            <h3>A. Bukti Eksekusi Otomatisasi</h3>
+            <p>
+                Sebagai bentuk pengamanan integritas data skala direktori, berikut adalah dokumentasi eksekusi script otomatisasi hashing menggunakan kombinasi parameter <code>Get-ChildItem</code> yang di-piping dengan perintah <code>Get-FileHash</code>.
+            </p>
+            <p>Perintah yang dieksekusi:</p>
+            <div class="code-block-wrapper">
+                <pre><code id="codeBlock5">Get-ChildItem "D:\kahfi\BarangBukti_Muhammad Siraju Kahfi_24020260048" -File | Get-FileHash -Algorithm SHA256</code></pre>
+                <button class="copy-code-btn" onclick="copyText('codeBlock5')">Salin Skrip</button>
+            </div>
+
+            <div class="evidence-figure">
+                <img src="bonus.png" alt="Bukti PowerShell Bulk Hashing">
+                <div class="evidence-caption">Gambar 5.1: Dokumentasi Eksekusi Script Otomatisasi Hashing (Windows PowerShell)</div>
+            </div>
+
+            <h3>B. Analisis Forensik: Manfaat Otomatisasi Hash pada Kasus Skala Besar</h3>
+            <p>
+                Dalam simulasi dasar, menghitung hash satu atau dua file secara manual sangat mudah dilakukan. Namun, pada realitas penegakan hukum dan insiden siber modern (misalnya: penyitaan server sindikat judi online, penggerebekan cyber-terrorism, atau audit fraud perusahaan), penyidik berhadapan dengan hard drive, laptop, atau gawai yang memuat ratusan ribu hingga jutaan artefak digital.
+            </p>
+            <p>
+                Mengeksekusi perintah hash secara manual satu per satu pada skenario tersebut tidak hanya tidak efisien, melainkan mustahil secara teknis. Pendekatan otomatisasi berbasis antarmuka baris perintah (<em>Command Line Interface/CLI</em>) memberikan tiga manfaat fundamental dalam penanganan bukti digital (<em>Digital Evidence Handling</em>):
+            </p>
+            
+            <h4>1. Efisiensi Waktu (Optimalisasi Golden Hours)</h4>
+            <p>
+                Otomatisasi memungkinkan sistem operasi untuk memindai seluruh direktori dan mengunci "sidik jari digital" dari ribuan file hanya dalam hitungan detik. Kecepatan ini sangat berharga bagi penyidik untuk segera menutup fase Akuisisi dan beralih ke fase Analisis Data, sehingga mempercepat proses penyidikan secara keseluruhan tanpa melanggar batas waktu penahanan tersangka.
+            </p>
+
+            <h4>2. Eliminasi Human Error (Kelalaian Manusia)</h4>
+            <p>
+                Input manual berulang sangat rentan terhadap kesalahan (typo nama file, ekstensi yang salah, dll). Selain itu, tersangka sering kali menyembunyikan file penting di dalam struktur sub-folder yang sangat dalam dan kompleks. Otomatisasi <code>Get-ChildItem</code> bertindak sebagai crawler sistematis yang memastikan seluruh sudut direktori dipindai hingga ke akar, menjamin tidak ada satu pun barang bukti yang terlewat dari proses hashing.
+            </p>
+
+            <h4>3. Jaminan Integritas Data Skala Besar (Bulk Data Integrity)</h4>
+            <p>
+                Manfaat hukum paling krusial dari otomatisasi ini adalah penciptaan daftar induk (<em>Master Hash List</em>) secara instan tepat setelah perangkat disita dan dipasangkan write-blocker di Tempat Kejadian Perkara (TKP). Daftar induk ini akan menjadi tameng forensik yang solid di persidangan untuk membuktikan secara matematis bahwa sejak perangkat tersebut disita oleh kepolisian hingga dianalisis di laboratorium, tidak ada satupun file yang diam-diam disisipkan (<em>planted evidence</em>), direkayasa metadatanya, atau dihapus oleh pihak manapun.
+            </p>
+        </section>
+
+        <!-- ==========================================================================
+           FOOTER DETAILS
+           ========================================================================== */ -->
+        <footer class="dossier-footer">
+            <p>© 2026 Laporan Forensik Digital. Muhammad Siraju Kahfi (NIM: 24020260048). All Rights Reserved.</p>
+        </footer>
+
+    </div>
+
+    <!-- ==========================================================================
+       VANILLA JAVASCRIPT LOGIC (SPA Mechanics & UI Actions)
+       ========================================================================== */ -->
+    <script>
+        // ==========================================
+        // SPA TAB SWITCHING LOGIC
+        // ==========================================
+        function switchTab(sectionId) {
+            // Check if in Full Dossier Mode
+            if (document.getElementById('viewModeBtn').classList.contains('active-full')) {
+                // If in full mode, smooth scroll to the target section instead
+                const targetElement = document.getElementById(sectionId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                return;
+            }
+
+            // Remove active class from all tabs
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+
+            // Hide all sections
+            const sections = document.querySelectorAll('.dossier-section');
+            sections.forEach(sec => sec.classList.remove('active'));
+
+            // Find current tab button and activate it
+            const activeTabBtn = Array.from(tabButtons).find(btn => btn.getAttribute('onclick').includes(sectionId));
+            if (activeTabBtn) {
+                activeTabBtn.classList.add('active');
+            }
+
+            // Show and animate active section
+            const activeSec = document.getElementById(sectionId);
+            if (activeSec) {
+                activeSec.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Toggle Full Document View Mode vs SPA Tab Mode
+        function toggleViewMode() {
+            const viewModeBtn = document.getElementById('viewModeBtn');
+            const dossierTabs = document.getElementById('dossierTabs');
+            const sections = document.querySelectorAll('.dossier-section');
+
+            if (!viewModeBtn.classList.contains('active-full')) {
+                // Switch to Full Document Mode
+                viewModeBtn.classList.add('active-full');
+                viewModeBtn.textContent = "Mode SPA (Tampilan Tab)";
+                
+                // Hide tabs navigation
+                dossierTabs.style.display = 'none';
+                
+                // Show all sections at once
+                sections.forEach(sec => {
+                    sec.classList.add('active');
+                    sec.style.marginBottom = '4rem';
+                    sec.style.borderBottom = '1px dashed var(--color-border)';
+                    sec.style.paddingBottom = '3rem';
+                });
+                
+                // Remove border from the last section
+                sections[sections.length - 1].style.borderBottom = 'none';
+                sections[sections.length - 1].style.paddingBottom = '0';
+            } else {
+                // Switch back to SPA Tab Mode
+                viewModeBtn.classList.remove('active-full');
+                viewModeBtn.textContent = "Tampilkan Semua Halaman";
+                
+                // Show tabs navigation
+                dossierTabs.style.display = 'flex';
+                
+                // Hide all except first tab (or active tab)
+                sections.forEach((sec, idx) => {
+                    sec.style.marginBottom = '0';
+                    sec.style.borderBottom = 'none';
+                    sec.style.paddingBottom = '0';
+                    if (idx === 0) {
+                        sec.classList.add('active');
+                    } else {
+                        sec.classList.remove('active');
+                    }
+                });
+                
+                // Reset active tab button
+                const tabButtons = document.querySelectorAll('.tab-btn');
+                tabButtons.forEach((btn, idx) => {
+                    if (idx === 0) btn.classList.add('active');
+                    else btn.classList.remove('active');
+                });
+            }
+        }
+
+        // ==========================================
+        // UTILITY OPERATIONS (Copy & Theme Toggle)
+        // ==========================================
+        function copyText(elementId) {
+            const codeEl = document.getElementById(elementId);
+            let textToCopy = codeEl.innerText;
+            
+            if (textToCopy.endsWith("Salin")) {
+                textToCopy = textToCopy.slice(0, -5);
+            }
+            if (textToCopy.endsWith("Salin Skrip")) {
+                textToCopy = textToCopy.slice(0, -11);
+            }
+
+            textToCopy = textToCopy.trim();
+
+            function updateButtonVisuals() {
+                const wrapper = codeEl.closest('.code-block-wrapper');
+                const btn = wrapper ? wrapper.querySelector('.copy-code-btn') : null;
+                if (btn) {
+                    const originalText = btn.textContent;
+                    btn.textContent = "Tersalin!";
+                    btn.style.backgroundColor = "var(--color-accent-green-light)";
+                    btn.style.color = "var(--color-accent-green)";
+                    btn.style.borderColor = "var(--color-accent-green)";
+                    
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.style.backgroundColor = "";
+                        btn.style.color = "";
+                        btn.style.borderColor = "";
+                    }, 2000);
+                }
+            }
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(textToCopy).then(updateButtonVisuals).catch(err => {
+                    fallbackCopyText(textToCopy, updateButtonVisuals);
+                });
+            } else {
+                fallbackCopyText(textToCopy, updateButtonVisuals);
+            }
+        }
+
+        function fallbackCopyText(text, callback) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.position = "fixed";
+            textArea.style.opacity = "0";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                const successful = document.execCommand('copy');
+                if (successful && callback) {
+                    callback();
+                } else {
+                    console.error('Fallback copy command failed');
+                }
+            } catch (err) {
+                console.error('Fallback copy command error: ', err);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        function toggleDarkMode() {
+            const body = document.body;
+            const themeBtn = document.getElementById('themeBtn');
+            
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                themeBtn.textContent = "Mode Kontras Tinggi (Terang)";
+            } else {
+                themeBtn.textContent = "Mode Kontras Tinggi (Gelap)";
+            }
+        }
+    </script>
+</body>
+</html>
